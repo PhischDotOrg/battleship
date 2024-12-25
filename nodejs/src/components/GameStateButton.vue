@@ -9,14 +9,18 @@
 </template>
 
 <script setup lang="ts">
-  import { defineProps } from 'vue';
-  import { GameState } from '../types/GameState';
+  import { GameState } from '@/types/GameState';
 
   // Define props
-  const props = defineProps<{
-    status: GameState,
-    default: GameState.Error
-  }>();
+  const props = defineProps({
+    status: {
+      type: Object as PropType<GameState>,
+      required: true,
+
+      // Default to the error state
+      default: GameState.Error
+    }
+  });
 
   // Method to calculate button color
   function getButtonColor(): string {

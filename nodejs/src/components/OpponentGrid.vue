@@ -12,8 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineProps } from 'vue';
-  import { GameState } from '../types/GameState';
+  import { GameState } from '@/types/GameState';
 
   const props = defineProps({
     opponents: {
