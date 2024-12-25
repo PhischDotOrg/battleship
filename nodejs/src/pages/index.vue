@@ -36,7 +36,7 @@
         no-gutters
       >
         <v-col>
-          Bottom
+          <Footer />
         </v-col>
       </v-row>
     </v-container>

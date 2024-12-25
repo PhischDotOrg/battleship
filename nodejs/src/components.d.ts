@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    Connection: typeof import('./components/Connection.vue')['default']
+    Footer: typeof import('./components/Footer.vue')['default']
     GameGrid: typeof import('./components/GameGrid.vue')['default']
     GameStateButton: typeof import('./components/GameStateButton.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
@@ -19,5 +21,6 @@ declare module 'vue' {
     PlayerView: typeof import('./components/PlayerView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Settings: typeof import('./components/Settings.vue')['default']
   }
 }
