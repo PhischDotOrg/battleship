@@ -15,6 +15,8 @@ declare module 'vue' {
     OpponentGrid1: typeof import('./components/OpponentGrid1.vue')['default']
     OpponentGrid2: typeof import('./components/OpponentGrid2.vue')['default']
     OpponentGrid4: typeof import('./components/OpponentGrid4.vue')['default']
+    OpponentView: typeof import('./components/OpponentView.vue')['default']
+    PlayerView: typeof import('./components/PlayerView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
