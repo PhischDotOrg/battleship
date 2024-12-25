@@ -1,31 +1,24 @@
 <template>
   <v-btn
-    :color="getButtonColor()"
+    :color="getButtonColor(props.status)"
     readonly
     outlined
   >
-    {{ getButtonText() }}
+    {{ getButtonText(props.status) }}
   </v-btn>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { GameState } from '@/types/GameState';
 
-  // Define props
-  const props = defineProps({
-    status: {
-      type: Object as PropType<GameState>,
-      required: true,
-
-      // Default to the error state
-      default: GameState.Error
-    }
-  });
+  const props = defineProps<{
+    status: GameState;
+  }>();
 
   // Method to calculate button color
-  function getButtonColor(): string {
+  function getButtonColor(pStatus: GameState): string {
     // Return the color based on the game state
-    switch (props.status) {
+    switch (pStatus) {
       case GameState.Playing:
         return 'primary';
       case GameState.Waiting:
@@ -42,9 +35,9 @@
   }
 
   // Method to calculate button text
-  function getButtonText(): string {
+  function getButtonText(pStatus: GameState): string {
     // Return the text based on the game state
-    switch (props.status) {
+    switch (pStatus) {
       case GameState.Playing:
         return 'Playing';
       case GameState.Waiting:
