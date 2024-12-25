@@ -51,6 +51,7 @@
                     rounded
                     class="grid-cell"
                     :color="isHovering ? 'secondary' : 'default'"
+                    @click="handleClick(col, row)"
                   >
                     &nbsp;
                   </v-sheet>
@@ -97,6 +98,10 @@
 
   const getRowHeaderColor = (row: number) => {
     return row % 2 === 0 ? 'grey-lighten-1' : 'grey-lighten-2';
+  };
+
+  const handleClick = (col: number, row: number) => {
+    console.log(`Clicked on cell x=${col}, y=${row}`);
   };
 </script>
 
