@@ -39,18 +39,23 @@
               </v-sheet>
 
               <!-- Inner Cells -->
-              <v-sheet
+              <v-hover
                 v-else
-                border
-                rounded
-                class="grid-cell player-cell"
-                :elevation="hoveredCell === `${row}-${col}` ? 1 : 0"
-                @mouseover="hoveredCell = `${row}-${col}`"
-                @mouseleave="hoveredCell = null"
-                @click="handleCellClick(row, col)"
               >
-                &nbsp;
-              </v-sheet>
+                <template
+                  #default="{ isHovering, props }"
+                >
+                  <v-sheet
+                    v-bind="props"
+                    border
+                    rounded
+                    class="grid-cell"
+                    :color="isHovering ? 'secondary' : 'default'"
+                  >
+                    &nbsp;
+                  </v-sheet>
+                </template>
+              </v-hover>
             </td>
           </tr>
         </table>
@@ -93,14 +98,6 @@
   const getRowHeaderColor = (row: number) => {
     return row % 2 === 0 ? 'grey-lighten-1' : 'grey-lighten-2';
   };
-
-  // Define a reactive variable to track the hovered cell
-  const hoveredCell = ref<string | null>(null);
-
-  // Define a method to handle the click event
-  const handleCellClick = (row: number, col: number) => {
-    console.log(`Cell clicked: Row ${row}, Column ${col}`);
-  };
 </script>
 
 <style scoped>
@@ -109,9 +106,5 @@
     height: 2em; /* Set the height of each cell */
     text-align: center; /* Center the text horizontally */
     vertical-align: middle; /* Center the text vertically */
-  }
-
-  .player-cell:hover {
-    cursor: pointer; /* Change the cursor to a pointer on hover */
   }
 </style>
