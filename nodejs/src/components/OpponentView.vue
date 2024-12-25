@@ -2,7 +2,6 @@
   <!-- Header / Title -->
   <v-container>
     <v-row
-      align="top"
       justify="center"
     >
       <v-col>
@@ -17,7 +16,6 @@
   <v-container>
     <v-sheet>
       <v-row
-        align="center"
         justify="center"
         no-gutters
       >

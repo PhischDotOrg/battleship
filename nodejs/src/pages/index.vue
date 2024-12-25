@@ -3,7 +3,6 @@
     <!-- Header Row -->
     <v-container>
       <v-row
-        align="start"
         no-gutters
       >
         <v-col cols="2" />
@@ -19,7 +18,6 @@
     <!-- Main Content -->
     <v-container>
       <v-row
-        align="center"
         no-gutters
       >
         <v-col>
@@ -35,7 +33,6 @@
     <!-- Footer Row -->
     <v-container>
       <v-row
-        align="end"
         no-gutters
       >
         <v-col>
