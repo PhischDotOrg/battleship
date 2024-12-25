@@ -21,11 +21,11 @@
         no-gutters
       >
         <v-col>
-          <PlayerView />
+          <OpponentView />
         </v-col>
 
         <v-col>
-          <OpponentView />
+          <PlayerView />
         </v-col>
       </v-row>
     </v-container>
