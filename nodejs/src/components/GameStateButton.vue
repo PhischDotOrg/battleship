@@ -10,19 +10,12 @@
 
 <script setup lang="ts">
   import { defineProps } from 'vue';
-
-  // Define an enum for the game state
-  enum GameState {
-    Offline = 'offline',
-    Waiting = 'waiting',
-    Playing = 'playing',
-    Winning = 'winning',
-    Losing = 'losing',
-  }
+  import { GameState } from '../types/GameState';
 
   // Define props
   const props = defineProps<{
-    status: GameState;
+    status: GameState,
+    default: GameState.Error
   }>();
 
   // Method to calculate button color

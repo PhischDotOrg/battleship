@@ -9,7 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     GameGrid: typeof import('./components/GameGrid.vue')['default']
-    GameState: typeof import('./components/GameState.vue')['default']
+    GameState: typeof import('./components/GameStateButton.vue')['default']
+    GameStateButton: typeof import('./components/GameStateButton.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     OpponentGrid: typeof import('./components/OpponentGrid.vue')['default']

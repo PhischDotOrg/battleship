@@ -17,11 +17,11 @@
       Battleship
     </v-card-title>
     <v-card-text class="text-center">
-      <GameState status="waiting" />
+      <GameStateButton :status="GameState.Waiting" />
     </v-card-text>
   </v-card>
 </template>
 
-<script setup lang="ts">
-
+<script lang="ts" setup>
+  import { GameState } from '../types/GameState';
 </script>

@@ -5,14 +5,15 @@
     v-else-if="props.opponents == 3 || props.opponents == 4"
     :opponents="props.opponents"
   />
-  <GameState
+  <GameStateButton
     v-else
-    status="error"
+    :status="GameState.Error"
   />
 </template>
 
 <script lang="ts" setup>
   import { defineProps } from 'vue';
+  import { GameState } from '../types/GameState';
 
   const props = defineProps({
     opponents: {
