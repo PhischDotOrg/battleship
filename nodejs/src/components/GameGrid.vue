@@ -1,81 +1,63 @@
 <template>
-  <div
-    v-for="row in Array.from({ length: height }, (_, i) => i)"
-    id="`row-${row}`"
-    :key="`row-${row}`"
-    class="d-flex"
-  >
-    <!-- Create a container for each column in the row -->
-    <div
-      v-for="col in Array.from({ length: width }, (_, i) => i)"
-      :key="`col-${col}`"
-      class="d-flex"
-    >
-      <div
-        v-if="row === 0 || row === height - 1 || col === 0 || col === width - 1"
-        class="d-flex"
-        align="center"
-      >
-        <!-- Top left corner -->
-        <v-sheet
-          v-if="row === 0 && col === 0"
-          class="grid-cell"
-        >
-          &nbsp;
-        </v-sheet>
+  <v-container>
+    <v-row>
+      <v-col />
+      <v-col>
+        <table>
+          <tr
+            v-for="row in Array.from({ length: height }, (_, i) => i)"
+            :key="`row-${row}`"
+          >
+            <td
+              v-for="col in Array.from({ length: width }, (_, i) => i)"
+              :key="`col-${col}`"
+            >
+              <!-- Corners -->
+              <v-sheet
+                v-if="(row === 0 && col === 0) || (row === 0 && col === width - 1) || (row === height - 1 && col === 0) || (row === height - 1 && col === width - 1)"
+                class="grid-cell"
+              >
+                &nbsp;
+              </v-sheet>
 
-        <!-- Top right corner -->
-        <v-sheet
-          v-else-if="row === 0 && col === width - 1"
-          class="grid-cell"
-        >
-          &nbsp;
-        </v-sheet>
+              <!-- Top and Bottom Rows -->
+              <v-sheet
+                v-else-if="row === 0 || row === height - 1"
+                class="grid-cell"
+                :color="getColumnHeaderColor(col)"
+              >
+                {{ getColumnHeader(col) }}
+              </v-sheet>
 
-        <!-- Bottom left corner -->
-        <v-sheet
-          v-else-if="row === height - 1 && col === 0"
-          class="grid-cell"
-        >
-          &nbsp;
-        </v-sheet>
+              <!-- Left and Right Columns -->
+              <v-sheet
+                v-else-if="col === 0 || col === width - 1"
+                class="grid-cell"
+                :color="getRowHeaderColor(row)"
+              >
+                {{ getRowHeader(row) }}
+              </v-sheet>
 
-        <!-- Bottom right corner -->
-        <v-sheet
-          v-else-if="row === height - 1 && col === width - 1"
-          class="grid-cell"
-        >
-          &nbsp;
-        </v-sheet>
-
-        <!-- Top and Bottom Rows -->
-        <v-sheet
-          v-else-if="row === 0 || row === height - 1"
-          class="grid-cell"
-          :color="getColumnHeaderColor(col)"
-        >
-          {{ getColumnHeader(col) }}
-        </v-sheet>
-
-        <!-- Left and Right Columns -->
-        <v-sheet
-          v-else-if="col === 0 || col === width - 1"
-          class="grid-cell"
-          :color="getRowHeaderColor(row)"
-        >
-          {{ getRowHeader(row) }}
-        </v-sheet>
-      </div>
-      <div
-        v-else
-        border
-        rounded
-        class="grid-cell"
-      >
-        {{ row }}, {{ col }}
-      </div>
-    </div>
-  </div>
+              <!-- Inner Cells -->
+              <v-sheet
+                v-else
+                border
+                rounded
+                class="grid-cell player-cell"
+                :elevation="hoveredCell === `${row}-${col}` ? 1 : 0"
+                @mouseover="hoveredCell = `${row}-${col}`"
+                @mouseleave="hoveredCell = null"
+                @click="handleCellClick(row, col)"
+              >
+                &nbsp;
+              </v-sheet>
+            </td>
+          </tr>
+        </table>
+      </v-col>
+      <v-col />
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
@@ -111,11 +93,25 @@
   const getRowHeaderColor = (row: number) => {
     return row % 2 === 0 ? 'grey-lighten-1' : 'grey-lighten-2';
   };
+
+  // Define a reactive variable to track the hovered cell
+  const hoveredCell = ref<string | null>(null);
+
+  // Define a method to handle the click event
+  const handleCellClick = (row: number, col: number) => {
+    console.log(`Cell clicked: Row ${row}, Column ${col}`);
+  };
 </script>
 
 <style scoped>
   .grid-cell {
     width: 2em; /* Set the width of each cell */
     height: 2em; /* Set the height of each cell */
+    text-align: center; /* Center the text horizontally */
+    vertical-align: middle; /* Center the text vertically */
+  }
+
+  .player-cell:hover {
+    cursor: pointer; /* Change the cursor to a pointer on hover */
   }
 </style>
