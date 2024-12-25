@@ -12,13 +12,17 @@
       <v-spacer cols="1" />
       <v-col cols="4">
         <GameGrid
-          width="10"
-          height="10"
+          :width="gameStore.width"
+          :height="gameStore.height"
         />
       </v-col>
       <v-spacer cols="2" />
       <v-col cols="4">
-        <OpponentGrid opponents="1" />
+        <OpponentGrid
+          :width="gameStore.width"
+          :height="gameStore.height"
+          :opponents="gameStore.opponents"
+        />
       </v-col>
       <v-spacer cols="1" />
     </v-row>
@@ -33,5 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-  //
+  import { useGameStore } from '@/stores/game';
+
+  const gameStore = useGameStore();
 </script>
