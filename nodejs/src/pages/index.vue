@@ -44,7 +44,5 @@
 </template>
 
 <script lang="ts" setup>
-  import { useGameStore } from '@/stores/game';
 
-  const gameStore = useGameStore();
 </script>

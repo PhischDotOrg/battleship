@@ -18,6 +18,7 @@
             max="2"
             hide-details
             single-line
+            :disabled="gameStore.isHost === false"
           />
         </v-col>
 
@@ -35,6 +36,7 @@
             max="2"
             hide-details
             single-line
+            :disabled="gameStore.isHost === false"
           />
         </v-col>
 
@@ -52,6 +54,7 @@
             max="1"
             hide-details
             single-line
+            :disabled="gameStore.isHost === false"
           />
         </v-col>
 
@@ -69,6 +72,7 @@
             max="1"
             hide-details
             single-line
+            :disabled="gameStore.isHost === false"
           />
         </v-col>
       </v-row>
@@ -77,9 +81,30 @@
 </template>
 
 <script lang="ts" setup>
+  import { useGameStore } from '@/stores/game';
+  import { computed } from 'vue';
+
+  const gameStore = useGameStore();
+
   const ships = ref('5');
-  const numShips2 = ref(1);
-  const numShips3 = ref(2);
-  const numShips4 = ref(1);
-  const numShips5 = ref(1);
+
+  const numShips2 = computed({
+    get: () => gameStore.ships[2],
+    set: (value) => gameStore.ships[2] = value
+  });
+
+  const numShips3 = computed({
+    get: () => gameStore.ships[3],
+    set: (value) => gameStore.ships[3] = value
+  });
+
+  const numShips4 = computed({
+    get: () => gameStore.ships[4],
+    set: (value) => gameStore.ships[4] = value
+  });
+
+  const numShips5 = computed({
+    get: () => gameStore.ships[5],
+    set: (value) => gameStore.ships[5] = value
+  });
 </script>
