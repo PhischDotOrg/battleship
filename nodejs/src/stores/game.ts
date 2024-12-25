@@ -11,5 +11,13 @@ export const useGameStore = defineStore('game', () => {
   const width = ref(10);
   const height = ref(10);
 
-  return { state, opponents, width, height }
+  // Define a dictionary to store the number of ships by type
+  const ships = ref<{ [key: number]: number }>({
+    2: 1,
+    3: 2,
+    4: 1,
+    5: 1
+  });
+
+  return { state, opponents, width, height, ships }
 })
