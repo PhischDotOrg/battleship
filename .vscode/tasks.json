@@ -1,0 +1,237 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        /* Django - makemigrations */
+        {
+            "label": "Django - makemigrations",
+            "type": "process",
+            "command": "${command:python.interpreterPath}",
+            "options": {
+                "cwd": "${workspaceFolder}/django",
+                "env": {
+                    "DJANGO_DEBUG": "True",
+                    "DJANGO_LOCAL_DB" : "${input:django-local-db}"
+                }
+            },
+            "args": [
+                "manage.py",
+                "makemigrations"
+            ],
+            "isBackground": false,
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "group": "django",
+                "close": false
+            }
+        },
+        /* Django - migrate */
+        {
+            "label": "Django - migrate",
+            "type": "process",
+            "dependsOn": [
+                "Django - makemigrations"
+            ],
+            "command": "${command:python.interpreterPath}",
+            "options": {
+                "cwd": "${workspaceFolder}/django",
+                "env": {
+                    "DJANGO_DEBUG": "True",
+                    "DJANGO_LOCAL_DB" : "${input:django-local-db}"
+                }
+            },
+            "args": [
+                "manage.py",
+                "migrate"
+            ],
+            "isBackground": false,
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "django",
+                "close": false
+            }
+        },
+        /* Django - Summary Task */
+        {
+            "label": "Django",
+            "dependsOn": [
+                "Django - migrate"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        /* Django - runserver */
+        {
+            "label": "Django - runserver",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "options": {
+                "cwd": "${workspaceFolder}/django",
+                "env": {
+                    "DJANGO_DEBUG": "True",
+                    "DJANGO_LOCAL_DB" : "${input:django-local-db}",
+                    // "DJANGO_GOOGLE_OAUTH2_KEY": "",
+                    // "DJANGO_GOOGLE_OAUTH2_SECRET": ""
+                }
+            },
+            "args": [
+                "manage.py",
+                "runserver"
+            ],
+            "dependsOn": [
+                "Django"
+            ],
+            "problemMatcher": [
+                {
+                    "owner": "custom",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceFolder}/django"
+                    ],
+                    "pattern": {
+                        "regexp": "(^/.*:)(.*)$",
+                        "file": 1,
+                        "location": 0,
+                        "message": 2
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".*Performing system checks.*",
+                        "endsPattern": ".*Quit the server with CONTROL-C.*"
+                    }
+                }
+            ]
+        },
+        /* Django - collectstatic */
+        {
+            "label": "Django - collectstatic ",
+            "type": "process",
+            "command": "${command:python.interpreterPath}",
+            "options": {
+                "cwd": "${workspaceFolder}/django",
+                "env": {
+                    "DJANGO_DEBUG": "False"
+                }
+            },
+            "args": [
+                "manage.py",
+                "collectstatic",
+                "--noinput"
+            ],
+            "isBackground": false,
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "django",
+                "close": false
+            }
+        },
+        /* npm - install */
+        {
+            "label": "npm: install",
+            "type": "npm",
+            "script": "install",
+            "options": {
+                "cwd": "${workspaceFolder}/nodejs"
+            },
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+        /* npm - build */
+        {
+            "label": "npm: build",
+            "type": "npm",
+            "script": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/nodejs"
+            },
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "dependsOn": [
+                "npm: install"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        /* npm - dev */
+        {
+            "label": "npm: dev",
+            "type": "npm",
+            "script": "dev",
+            "detail": "vite",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}/nodejs"
+            },
+            "problemMatcher": [
+                {
+                    "owner": "custom",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceFolder}"
+                    ],
+                    "pattern": {
+                        "regexp": "^ERRORPARSING IS NOT SUPPORTED (.*)$",
+                        "file": 0,
+                        "location": 0,
+                        "message": 0
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "ready in (.*) ms",
+                        "endsPattern": "press (.*) to show help"
+                    }
+                }
+            ]
+        }
+    ],
+    "inputs": [
+        /* Select Django Local DB */
+        {
+            "id": "django-local-db",
+            "type": "pickString",
+            "description": "Use local database?",
+            "options": [
+                {
+                    "label": "Yes",
+                    "description": "Use local database",
+                    "detail": "Use local database",
+                    "value": "True"
+                },
+                {
+                    "label": "No",
+                    "description": "Use remote database",
+                    "detail": "Use remote database",
+                    "value": "False"
+                }
+            ]
+        }
+    ]
+}

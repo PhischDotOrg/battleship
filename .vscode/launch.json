@@ -1,0 +1,50 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      /* Ignuntify: Django API */
+      {
+          "name": "Django API",
+          "type": "python",
+          "request": "launch",
+          "program": "${workspaceFolder}/django/manage.py",
+          "args": ["runserver"],
+          "cwd": "${workspaceFolder}/django",
+          "env": {
+            "DJANGO_DEBUG": "True",
+            "DJANGO_LOCAL_DB" : "True",
+            // "DJANGO_GOOGLE_OAUTH2_KEY": "",
+            // "DJANGO_GOOGLE_OAUTH2_SECRET": "",
+          },
+          "django": true,
+          "justMyCode": true,
+          "preLaunchTask": "Django"
+      },
+      /* Ignuntify: Vue.js App */
+      {
+        "name": "Debug Vue.js App in Chrome",
+        "type": "chrome",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/nodejs",
+        "skipFiles": ["${workspaceFolder}/node_modules/**/*.js"],
+        "url": "http://localhost:5173",
+        "webRoot": "${workspaceFolder}",
+        "preLaunchTask": "npm: dev",
+      },
+      /* Vue.js Unit Tests */
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Vue.js Unit Tests",
+        "autoAttachChildProcesses": true,
+        "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+        "program": "${workspaceRoot}/nodejs/node_modules/vitest/vitest.mjs",
+        "args": [
+          "run",
+          "--test-timeout=60000",
+        ],
+        "smartStep": true,
+        "cwd": "${workspaceFolder}/nodejs",
+        "console": "integratedTerminal"
+      }
+    ]
+}
