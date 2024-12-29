@@ -44,5 +44,12 @@
 </template>
 
 <script lang="ts" setup>
+  import { useGameStore } from '@/stores/game';
 
+  const gameStore = useGameStore();
+
+  // Watch gameStore.selection for changes
+  watch(() => gameStore.selection, () => {
+    console.log(`Ships: ${gameStore.selection}`);
+  });
 </script>

@@ -30,5 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-
+  function connect(): void {
+    console.log('Connect to server');
+  }
 </script>

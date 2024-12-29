@@ -1,19 +1,26 @@
 import { defineStore } from 'pinia'
 import { GameState } from '@/types/GameState';
 
+export type Coordinate = {
+  x: number,
+  y: number
+}
+
 export type Game = {
   state     : GameState,
   opponents : number,
   isHost    : boolean,
   width     : number,
   height    : number,
-  ships     : { [key: number]: number }
+  ships     : { [key: number]: number },
+  selection : number,
+  placement : { [key: number]: Coordinate[] },
 }
 
 export const useGameStore = defineStore('game', {
   state: (): Game => ({
-    state: GameState.Waiting,
-    isHost: false,
+    state: GameState.Placing,
+    isHost: true,
     opponents: 1,
     width: 10,
     height: 10,
@@ -22,6 +29,8 @@ export const useGameStore = defineStore('game', {
       3: 2,
       4: 1,
       5: 1
-    }
+    },
+    selection: 2,
+    placement: {},
   })
 })

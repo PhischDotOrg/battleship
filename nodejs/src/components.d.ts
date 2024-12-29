@@ -10,6 +10,7 @@ declare module 'vue' {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     Connection: typeof import('./components/Connection.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    GameCell: typeof import('./components/GameCell.vue')['default']
     GameGrid: typeof import('./components/GameGrid.vue')['default']
     GameStateButton: typeof import('./components/GameStateButton.vue')['default']
     Header: typeof import('./components/Header.vue')['default']

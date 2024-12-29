@@ -86,7 +86,10 @@
 
   const gameStore = useGameStore();
 
-  const ships = ref('5');
+  const ships = computed({
+    get: () => gameStore.selection,
+    set: (value) => gameStore.selection = value
+  });
 
   const numShips2 = computed({
     get: () => gameStore.ships[2],

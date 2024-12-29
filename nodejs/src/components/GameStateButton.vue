@@ -19,6 +19,8 @@
   function getButtonColor(pStatus: GameState): string {
     // Return the color based on the game state
     switch (pStatus) {
+      case GameState.Placing:
+        return 'primary';
       case GameState.Playing:
         return 'primary';
       case GameState.Waiting:
@@ -38,6 +40,8 @@
   function getButtonText(pStatus: GameState): string {
     // Return the text based on the game state
     switch (pStatus) {
+      case GameState.Placing:
+        return 'Placing';
       case GameState.Playing:
         return 'Playing';
       case GameState.Waiting:
